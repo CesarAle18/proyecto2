@@ -22,9 +22,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
         emailController.text.isEmpty ||
         nameController.text.isEmpty ||
         phoneController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Completar los campos')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Completar los campos')));
       return;
     }
 
@@ -44,16 +44,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Usuario registrado correctamente')),
         );
-        Navigator.pop(context);
+        // Redirige a la pantalla de login
+        Navigator.pushReplacementNamed(context, '/');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error al registrar el usuario')),
         );
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error de conexión')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error de conexión')));
     }
   }
 
@@ -76,9 +77,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 labelText: 'Contraseña',
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _obscureText
-                        ? Icons.visibility_off
-                        : Icons.visibility,
+                    _obscureText ? Icons.visibility_off : Icons.visibility,
                     color: const Color(0xFF0958B8),
                   ),
                   onPressed: () {
